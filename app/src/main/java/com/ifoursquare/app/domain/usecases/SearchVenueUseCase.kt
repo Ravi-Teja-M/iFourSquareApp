@@ -1,10 +1,11 @@
 package com.ifoursquare.app.domain.usecases
 
 import android.location.Location
+import com.ifoursquare.app.data.model.VenueModel
 
 interface SearchVenueUseCase : UseCase {
 
-    fun searchVenueByString( searchedString: String?)
+    suspend fun searchVenueByString( searchedString: String?) : VenueModel
 
-    fun searchVenueByLocation(location: Location?)
+    suspend fun searchVenueByLocation(location: String?) : VenueModel
 }

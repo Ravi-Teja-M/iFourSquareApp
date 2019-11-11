@@ -1,25 +1,26 @@
 package com.ifoursquare.app.domain.interactor
 
-import android.location.Location
+import com.ifoursquare.app.data.model.VenueModel
 import com.ifoursquare.app.data.repositories.SearchVenueRepository
 import com.ifoursquare.app.domain.usecases.SearchVenueUseCase
 
 class SearchVenue : SearchVenueUseCase {
 
-    val repository =   SearchVenueRepository.instance()
+    private val repository :SearchVenueRepository  =  SearchVenueRepository.get()
+
 
     companion object {
         fun get() = SearchVenue()
     }
 
-    override fun searchVenueByString(searchedString: String?) {
+    override suspend fun searchVenueByString(searchedString: String?) : VenueModel{
 
-        repository.searchVenueByString(searchedString)
+       return repository.searchVenueByString(searchedString)
     }
 
-    override fun searchVenueByLocation(location: Location?) {
+    override suspend fun searchVenueByLocation(location: String?) :VenueModel {
 
-         repository.searchVenueByLocation(location)
+        return repository.searchVenueByLocation(location)
 
     }
 

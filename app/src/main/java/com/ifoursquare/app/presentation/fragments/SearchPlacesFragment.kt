@@ -5,20 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.appcompat.widget.SearchView.OnQueryTextListener
-import androidx.databinding.DataBindingUtil
+ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ifoursquare.app.R
 import com.ifoursquare.app.databinding.SearchPlacesFragmentBinding
+import com.ifoursquare.app.networking.ServiceConstants
 import com.ifoursquare.app.presentation.adapters.SearchListViewAdapter
+import com.ifoursquare.app.presentation.viewmodels.SearchPlacesViewModel
 
 class SearchPlacesFragment : Fragment() {
 
     private lateinit var binding: SearchPlacesFragmentBinding
     private lateinit var viewModel: SearchPlacesViewModel
-    private lateinit var mSearchListAdapter: SearchListViewAdapter
+    private var mSearchListAdapter: SearchListViewAdapter = SearchListViewAdapter()
 
     companion object {
         fun newInstance() = SearchPlacesFragment()
@@ -30,20 +32,22 @@ class SearchPlacesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.search_places_fragment, container, false)
-        initViewsWithActionAndData()
+        binding = DataBindingUtil.inflate(inflater, R.layout.search_places_fragment, container, false)
+
+        viewModel = ViewModelProviders.of(this).get(SearchPlacesViewModel::class.java)
+        binding.searchViewModel = viewModel
+
         return binding.root
     }
 
     private fun initViewsWithActionAndData() {
-        binding.searchViewModel = viewModel
+
         initRecyclerView()
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                val input = query
-                viewModel.searchVenuesByQuery(input)
+                //val input = query @TODO
+                viewModel.searchVenuesByLocation(ServiceConstants.mock_location)
 
                return false
             }
@@ -59,12 +63,22 @@ class SearchPlacesFragment : Fragment() {
     private fun initRecyclerView() {
         (binding.recyclerView)?.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-            adapter = SearchListViewAdapter()
+            adapter = mSearchListAdapter
         }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SearchPlacesViewModel::class.java)
+        initViewsWithActionAndData()
+        observeDatasetChanged()
+    }
+
+    private fun observeDatasetChanged() {
+        viewModel.mutabablePlacesList.observe(this, Observer { dataSet ->
+
+            mSearchListAdapter.updateData(dataSet)
+            mSearchListAdapter.notifyDataSetChanged()
+        })
+
     }
 }

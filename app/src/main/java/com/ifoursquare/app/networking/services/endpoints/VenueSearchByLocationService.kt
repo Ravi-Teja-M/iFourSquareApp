@@ -10,6 +10,5 @@ import retrofit2.http.QueryMap
 interface VenueSearchByLocationService {
 
     @GET("venues/search")
-    @Headers()
-    fun venueSearchByLocation(@Query("ll") latLong: String ) : Call<VenueModel>
+    suspend fun venueSearchByLocation(@Query("ll") latLong: String ) : VenueModel
 }
