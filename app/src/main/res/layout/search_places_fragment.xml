@@ -6,7 +6,7 @@
     <data >
         <variable
             name="searchViewModel"
-            type="com.ifoursquare.app.presentation.fragments.SearchPlacesViewModel" />
+            type="com.ifoursquare.app.presentation.viewmodels.SearchPlacesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

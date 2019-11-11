@@ -9,43 +9,24 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SearchVenueRepository : SearchVenueUseCase{
+class SearchVenueRepository : SearchVenueUseCase {
+    override suspend fun searchVenueByString(searchedString: String?): VenueModel {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     companion object {
-         private lateinit var sInstance : SearchVenueRepository
-         fun instance() : SearchVenueRepository {
-             if(sInstance == null) {
-                  sInstance = SearchVenueRepository()
-             }
-             return sInstance
-         }
-     }
-
-
-    override fun searchVenueByLocation(location: Location?) {
-
-        location?.let {
-            val service =  ApiClient.RetroInstance.get().create(VenueSearchByLocationService::class.java)
-            val latLongBuilder = "${location.latitude},${location.longitude} "
-            service.venueSearchByLocation(latLongBuilder).enqueue(object : Callback<VenueModel>{
-                override fun onFailure(call: Call<VenueModel>, t: Throwable) {
-
-                }
-
-                override fun onResponse(call: Call<VenueModel>, response: Response<VenueModel>) {
-                    if (response.isSuccessful){
-                        val data = response?.body()
-                        data?.response?.venues
-                    }
-                }
-            })
+        private lateinit var sInstance: SearchVenueRepository
+        fun instance(): SearchVenueRepository {
+            if (sInstance == null) {
+                sInstance = SearchVenueRepository()
+            }
+            return sInstance
         }
     }
 
 
-    override fun searchVenueByString(searchedString: String?) {
-
+    override suspend fun searchVenueByLocation(location: String?): VenueModel {
+        val service = ApiClient.RetroInstance.get().create(VenueSearchByLocationService::class.java)
+         return service.venueSearchByLocation(location!!)
     }
-
-
 }
