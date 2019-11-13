@@ -11,4 +11,7 @@ interface VenueSearchByLocationService {
 
     @GET("venues/search")
     suspend fun venueSearchByLocation(@Query("ll") latLong: String ) : VenueModel
+
+    @GET("venues/search")
+    suspend fun venueSearchNearBy(@Query("near") nearbyPlace: String ) : VenueModel
 }

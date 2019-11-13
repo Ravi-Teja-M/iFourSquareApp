@@ -2,28 +2,50 @@ package com.ifoursquare.app.presentation.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.ifoursquare.app.data.model.Venue
+import com.ifoursquare.app.data.model.VenueModel
 import com.ifoursquare.app.domain.interactor.SearchVenue
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class SearchPlacesViewModel : ViewModel() {
+class SearchPlacesViewModel : ViewModel() , CoroutineScope{
 
-    val mutabablePlacesList: MutableLiveData<List<Venue>> = MutableLiveData()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
+    private val job = Job()
 
-    fun  searchVenuesByLocation(input: String?) {
-        val searchVenueUseCase =  SearchVenue.get()
+    val mutablePlacesList: MutableLiveData<List<Venue>> = MutableLiveData()
+    private val searchVenueUseCase =  SearchVenue.get()
 
-        viewModelScope.launch {
+    fun  searchVenuesByLocation(input: String) {
+
+        launch(Dispatchers.Main) {
+            var venueModel: VenueModel? = null
+            launch(Dispatchers.IO) {
+                venueModel = searchVenueUseCase.searchVenueByLocation(input)
+            }
+            mutablePlacesList.value = venueModel?.response?.venues
+        }
+    }
+
+    fun searchVenueByInput(input:String) {
+
+        launch(Dispatchers.Main){
+
             withContext(Dispatchers.IO) {
-                val venueModel = searchVenueUseCase.searchVenueByLocation(input)
-                withContext(Dispatchers.Main) {
-                    mutabablePlacesList.value = venueModel?.response.venues
+
+                val venueModel = searchVenueUseCase.searchVenueByString(input)
+
+                withContext(Dispatchers.Main){
+                    mutablePlacesList.value = venueModel?.response?.venues
                 }
             }
         }
     }
- }
+
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
+    }
+}

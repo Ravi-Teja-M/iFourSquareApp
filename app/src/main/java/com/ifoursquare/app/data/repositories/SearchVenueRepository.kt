@@ -10,8 +10,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SearchVenueRepository : SearchVenueUseCase {
-    override suspend fun searchVenueByString(searchedString: String?) :VenueModel {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun searchVenueByString(searchedString: String?) :VenueModel  {
+        val service = ApiClient.RetroInstance.get().create(VenueSearchByLocationService::class.java)
+        return service.venueSearchNearBy(searchedString!!)
     }
 
     override  suspend  fun searchVenueByLocation(location: String?) : VenueModel{

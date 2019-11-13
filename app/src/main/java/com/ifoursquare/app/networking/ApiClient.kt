@@ -18,9 +18,7 @@ class ApiClient {
         private fun getRetrofitInstance(): Retrofit {
 
              var retrofit: Retrofit
-
-
-                 = Retrofit.Builder()
+                     = Retrofit.Builder()
                     //.addCallAdapterFactory() // RxJava Bindings
                     .addConverterFactory(GsonConverterFactory.create(Gson()))
                     .baseUrl(ServiceConstants.BASE_URL)

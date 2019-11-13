@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ifoursquare.app.R
 import com.ifoursquare.app.databinding.SearchPlacesFragmentBinding
-import com.ifoursquare.app.networking.ServiceConstants
 import com.ifoursquare.app.presentation.adapters.SearchListViewAdapter
 import com.ifoursquare.app.presentation.viewmodels.SearchPlacesViewModel
 
@@ -47,13 +46,15 @@ class SearchPlacesFragment : Fragment() {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
                 //val input = query @TODO
-                viewModel.searchVenuesByLocation(ServiceConstants.mock_location)
+
+                query?.let{
+                    viewModel.searchVenueByInput(query)
+                }
 
                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
 
               return false
             }
@@ -74,7 +75,7 @@ class SearchPlacesFragment : Fragment() {
     }
 
     private fun observeDatasetChanged() {
-        viewModel.mutabablePlacesList.observe(this, Observer { dataSet ->
+        viewModel.mutablePlacesList.observe(this, Observer { dataSet ->
 
             mSearchListAdapter.updateData(dataSet)
             mSearchListAdapter.notifyDataSetChanged()
