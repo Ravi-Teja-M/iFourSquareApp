@@ -8,4 +8,9 @@ data class Icon(
     val prefix: String,
     @SerializedName("suffix")
     val suffix: String
-)
+){
+
+    fun get64x64SizedImage():String {
+        return "${prefix}64${suffix} "
+    }
+}

@@ -71,12 +71,11 @@ class SearchPlacesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initViewsWithActionAndData()
-        observeDatasetChanged()
+        observeDataSetChanged()
     }
 
-    private fun observeDatasetChanged() {
+    private fun observeDataSetChanged() {
         viewModel.mutablePlacesList.observe(this, Observer { dataSet ->
-
             mSearchListAdapter.updateData(dataSet)
             mSearchListAdapter.notifyDataSetChanged()
         })

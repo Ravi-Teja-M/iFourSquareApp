@@ -23,7 +23,7 @@ android {
         }
     }
 
-    dataBinding{
+    dataBinding {
         enabled true
     }
 }
@@ -32,6 +32,8 @@ dependencies {
     def lifecycle_version = '2.1.0'
     def coroutine_version = '1.3.2'
     def retrofit_version = '2.6.0'
+    def glide_version = '4.10.0'
+    def gson_square_ver = "2.3.0"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -44,17 +46,18 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     implementation 'com.google.android.material:material:1.0.0'
-
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
-    // For Kotlin use lifecycle-viewmodel-ktx
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    // For Kotlin use lifecycle-viewmodel-ktx
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation "com.squareup.retrofit2:converter-gson:$gson_square_ver"
+    //implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
 }
