@@ -1,10 +1,13 @@
-package com.ifoursquare.app
+package com.ifoursquare.app.presentation.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.ifoursquare.app.IApplication
+import com.ifoursquare.app.R
 import com.ifoursquare.app.databinding.ActivityMainBinding
+import com.ifoursquare.app.presentation.di.components.ApplicationComponent
 import com.ifoursquare.app.presentation.fragments.NearByPlacesFragment
 import com.ifoursquare.app.presentation.fragments.SearchPlacesFragment
 
@@ -15,10 +18,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        initDaggerWithModules()
+
+        var binding: ActivityMainBinding = DataBindingUtil.setContentView(this,
+            R.layout.activity_main
+        )
         initBottomBarViewWithActions(binding)
 
         addSearchPlacesFragment()
+    }
+
+    private fun initDaggerWithModules(){
+      val applicationComponent = (application as IApplication).getApplicationComponent()
+      applicationComponent.inject(this)
     }
 
     private fun initBottomBarViewWithActions( binding :ActivityMainBinding ){
@@ -48,7 +60,6 @@ class MainActivity : AppCompatActivity() {
         currentSelectedFragment = searchPlacesFragment
     }
 
-
     private fun addNearByPlacesFragment() {
         val nearByPlacesFragment: NearByPlacesFragment = NearByPlacesFragment.newInstance()
         supportFragmentManager.beginTransaction().replace(R.id.container, nearByPlacesFragment).commit()
@@ -60,6 +71,7 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
         else{
+
          }
     }
 }

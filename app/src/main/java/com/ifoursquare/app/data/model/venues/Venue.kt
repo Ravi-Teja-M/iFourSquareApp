@@ -1,4 +1,4 @@
-package com.ifoursquare.app.data.model
+package com.ifoursquare.app.data.model.venues
 
 
 import com.google.gson.annotations.SerializedName

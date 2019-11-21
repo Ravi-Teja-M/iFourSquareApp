@@ -2,8 +2,8 @@ package com.ifoursquare.app.presentation.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ifoursquare.app.data.model.Venue
-import com.ifoursquare.app.data.model.VenueModel
+import com.ifoursquare.app.data.model.venues.Venue
+import com.ifoursquare.app.data.model.venues.VenueModel
 import com.ifoursquare.app.domain.interactor.SearchVenue
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext

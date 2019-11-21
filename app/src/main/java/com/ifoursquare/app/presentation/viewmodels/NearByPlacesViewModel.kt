@@ -1,4 +1,4 @@
-package com.ifoursquare.app.presentation.fragments
+package com.ifoursquare.app.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 

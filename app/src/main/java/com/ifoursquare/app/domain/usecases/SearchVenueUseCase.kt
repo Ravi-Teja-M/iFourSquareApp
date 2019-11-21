@@ -1,7 +1,6 @@
 package com.ifoursquare.app.domain.usecases
 
-import android.location.Location
-import com.ifoursquare.app.data.model.VenueModel
+import com.ifoursquare.app.data.model.venues.VenueModel
 
 interface SearchVenueUseCase : UseCase {
 

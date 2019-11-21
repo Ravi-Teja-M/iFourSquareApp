@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ifoursquare.app.R
-import com.ifoursquare.app.data.model.Venue
+import com.ifoursquare.app.data.model.venues.Venue
 
 class SearchListViewAdapter : RecyclerView.Adapter<SearchListViewAdapter.ViewHolderImpl>() {
 
@@ -19,7 +19,8 @@ class SearchListViewAdapter : RecyclerView.Adapter<SearchListViewAdapter.ViewHol
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderImpl {
         val view = LayoutInflater.from(parent.context as Activity)
             .inflate(R.layout.list_view_row_item, parent, false)
-        return ViewHolderImpl(view)
+
+         return ViewHolderImpl(view)
     }
 
     override fun getItemCount(): Int {
