@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 class ApiClient {
 
 
-    object RetroInstance {
+   /* object RetroInstance {
 
 
         fun get() = getRetrofitInstance()
@@ -57,5 +57,5 @@ class ApiClient {
             val request = original.newBuilder().url(httpUrlBuilder).build()
             chain.proceed(request)
         }
-    }
+    }*/
 }

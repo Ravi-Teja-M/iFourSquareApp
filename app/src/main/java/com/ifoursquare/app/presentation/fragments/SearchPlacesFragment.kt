@@ -1,5 +1,6 @@
 package com.ifoursquare.app.presentation.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ifoursquare.app.IApplication
 import com.ifoursquare.app.R
 import com.ifoursquare.app.databinding.SearchPlacesFragmentBinding
+import com.ifoursquare.app.presentation.activities.MainActivity
 import com.ifoursquare.app.presentation.adapters.SearchListViewAdapter
 import com.ifoursquare.app.presentation.viewmodels.SearchPlacesViewModel
 
@@ -39,6 +42,7 @@ class SearchPlacesFragment : Fragment() {
         return binding.root
     }
 
+
     private fun initViewsWithActionAndData() {
 
         initRecyclerView()
@@ -62,7 +66,7 @@ class SearchPlacesFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        (binding.recyclerView)?.apply {
+        (binding.recyclerView).apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             adapter = mSearchListAdapter
         }

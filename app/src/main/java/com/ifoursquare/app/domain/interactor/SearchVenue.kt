@@ -3,17 +3,14 @@ package com.ifoursquare.app.domain.interactor
 import com.ifoursquare.app.data.model.venues.VenueModel
 import com.ifoursquare.app.data.repositories.SearchVenueRepository
 import com.ifoursquare.app.domain.usecases.SearchVenueUseCase
+import javax.inject.Inject
 
-class SearchVenue : SearchVenueUseCase {
+class SearchVenue @Inject constructor() : SearchVenueUseCase {
 
-    private val repository :SearchVenueRepository  =  SearchVenueRepository.get()
+    @Inject
+    lateinit var repository :SearchVenueRepository
 
-
-    companion object {
-        fun get() = SearchVenue()
-    }
-
-    override suspend fun searchVenueByString(searchedString: String?) : VenueModel {
+     override suspend fun searchVenueByString(searchedString: String?) : VenueModel {
 
        return repository.searchVenueByString(searchedString)
     }
@@ -23,6 +20,5 @@ class SearchVenue : SearchVenueUseCase {
         return repository.searchVenueByLocation(location)
 
     }
-
 
 }

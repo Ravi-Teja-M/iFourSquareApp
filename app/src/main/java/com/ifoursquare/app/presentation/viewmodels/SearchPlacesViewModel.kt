@@ -6,17 +6,20 @@ import com.ifoursquare.app.data.model.venues.Venue
 import com.ifoursquare.app.data.model.venues.VenueModel
 import com.ifoursquare.app.domain.interactor.SearchVenue
 import kotlinx.coroutines.*
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class SearchPlacesViewModel : ViewModel() , CoroutineScope{
 
+    private val job = Job()
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    private val job = Job()
-
     val mutablePlacesList: MutableLiveData<List<Venue>> = MutableLiveData()
-    private val searchVenueUseCase =  SearchVenue.get()
+
+    @Inject
+    lateinit var searchVenueUseCase  :SearchVenue
 
     fun  searchVenuesByLocation(input: String) {
 
@@ -38,7 +41,7 @@ class SearchPlacesViewModel : ViewModel() , CoroutineScope{
                 val venueModel = searchVenueUseCase.searchVenueByString(input)
 
                 withContext(Dispatchers.Main){
-                    mutablePlacesList.value = venueModel?.response?.venues
+                    mutablePlacesList.value = venueModel.response.venues
                 }
             }
         }

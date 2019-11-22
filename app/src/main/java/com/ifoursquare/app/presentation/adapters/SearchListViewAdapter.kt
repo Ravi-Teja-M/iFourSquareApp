@@ -34,7 +34,7 @@ class SearchListViewAdapter : RecyclerView.Adapter<SearchListViewAdapter.ViewHol
             venueArea.text = dataSet[position].location.city
 
             val category = dataSet[position].categories.first()
-            category?.let {
+            category.let {
                 venueType.text = it.shortName
                 Glide.with(itemView.context).load((Uri.parse(it.icon.get64x64SizedImage()))).into(venueImage)
             }
