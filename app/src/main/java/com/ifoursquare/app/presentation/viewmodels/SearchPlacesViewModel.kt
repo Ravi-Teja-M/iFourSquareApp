@@ -9,19 +9,20 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class SearchPlacesViewModel : ViewModel() , CoroutineScope{
+class SearchPlacesViewModel : ViewModel(), CoroutineScope {
 
     private val job = Job()
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    val mutablePlacesList: MutableLiveData<List<Venue>> = MutableLiveData()
+    internal val mutablePlacesList: MutableLiveData<List<Venue>> = MutableLiveData()
 
-    @Inject
-    lateinit var searchVenueUseCase  :SearchVenue
 
-    fun  searchVenuesByLocation(input: String) {
+    private var searchVenueUseCase: SearchVenue = SearchVenue()
+
+    @Suppress("unused")
+    fun searchVenuesByLocation(input: String) {
 
         launch(Dispatchers.Main) {
             var venueModel: VenueModel? = null
@@ -32,15 +33,15 @@ class SearchPlacesViewModel : ViewModel() , CoroutineScope{
         }
     }
 
-    fun searchVenueByInput(input:String) {
+    fun searchVenueByInput(input: String) {
 
-        launch(Dispatchers.Main){
+        launch(Dispatchers.Main) {
 
             withContext(Dispatchers.IO) {
 
                 val venueModel = searchVenueUseCase.searchVenueByString(input)
 
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     mutablePlacesList.value = venueModel.response.venues
                 }
             }

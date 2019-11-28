@@ -52,7 +52,7 @@ class SearchPlacesFragment : Fragment() {
                 //val input = query @TODO
 
                 query?.let{
-                    viewModel.searchVenueByInput(query)
+                    //viewModel.searchVenueByInput(query)
                 }
 
                return false

@@ -11,14 +11,14 @@ class LoginModel( userName: String ="",    password: String="" ) : BaseObservabl
          @Bindable get() =  field
     set(value) {
         field= value
-        notifyPropertyChanged(BR.userName)
+        //notifyPropertyChanged(BR.userName)
      }
 
       var password: String = password
         @Bindable get() =  field
         set(value) {
             field= value
-            notifyPropertyChanged(BR.password)
+          //  notifyPropertyChanged(BR.password)
         }
 
 }

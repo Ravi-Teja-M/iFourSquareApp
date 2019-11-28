@@ -7,8 +7,7 @@ import javax.inject.Inject
 
 class SearchVenue @Inject constructor() : SearchVenueUseCase {
 
-    @Inject
-    lateinit var repository :SearchVenueRepository
+     lateinit var repository :SearchVenueRepository
 
      override suspend fun searchVenueByString(searchedString: String?) : VenueModel {
 
