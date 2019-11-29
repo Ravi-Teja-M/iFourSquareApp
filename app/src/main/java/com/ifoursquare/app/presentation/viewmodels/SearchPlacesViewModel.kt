@@ -9,7 +9,7 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class SearchPlacesViewModel : ViewModel(), CoroutineScope {
+class SearchPlacesViewModel @Inject constructor(private val searchVenueUseCase: SearchVenue) : ViewModel(), CoroutineScope {
 
     private val job = Job()
 
@@ -19,7 +19,7 @@ class SearchPlacesViewModel : ViewModel(), CoroutineScope {
     internal val mutablePlacesList: MutableLiveData<List<Venue>> = MutableLiveData()
 
 
-    private var searchVenueUseCase: SearchVenue = SearchVenue()
+   // private var searchVenueUseCase: SearchVenue = SearchVenue()
 
     @Suppress("unused")
     fun searchVenuesByLocation(input: String) {

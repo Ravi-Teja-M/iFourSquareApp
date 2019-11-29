@@ -3,22 +3,17 @@ package com.ifoursquare.app.presentation.activities
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.ifoursquare.app.IApplication
 import com.ifoursquare.app.R
-import com.ifoursquare.app.data.model.login.LoginModel
 import com.ifoursquare.app.databinding.ActivityMainBinding
 import com.ifoursquare.app.presentation.fragments.NearByPlacesFragment
 import com.ifoursquare.app.presentation.fragments.SearchPlacesFragment
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 import javax.inject.Named
 
-class MainActivity : AppCompatActivity()   {
+class MainActivity : DaggerAppCompatActivity()   {
 
     private var currentSelectedFragment: Fragment? = null
 
@@ -26,15 +21,9 @@ class MainActivity : AppCompatActivity()   {
     @Named("getApplicationContext")
     lateinit var contextX: Context
 
-    @Inject
-    lateinit var loginModel: LoginModel
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initDaggerWithModules()
 
         var binding: ActivityMainBinding = DataBindingUtil.setContentView(
             this,
@@ -45,11 +34,7 @@ class MainActivity : AppCompatActivity()   {
         addSearchPlacesFragment()
     }
 
-    private fun initDaggerWithModules() {
-        val activityComponent =
-            (application as IApplication).getApplicationComponent().activityComponent()
-        activityComponent.inject(this)
-     }
+
 
     private fun initBottomBarViewWithActions(binding: ActivityMainBinding) {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->

@@ -1,6 +1,5 @@
 package com.ifoursquare.app
 
-import android.app.Activity
 import android.app.Application
 import com.ifoursquare.app.presentation.di.components.ApplicationComponent
 import com.ifoursquare.app.presentation.di.components.DaggerApplicationComponent
@@ -11,28 +10,22 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class IApplication : Application( ), HasAndroidInjector{
+class IApplication : Application(), HasAndroidInjector {
 
     @Inject
-    lateinit var androidInjectorInstance : DispatchingAndroidInjector<Any>
+    lateinit var androidInjectorInstance: DispatchingAndroidInjector<Any>
 
-    override fun androidInjector(): AndroidInjector<Any>  = androidInjectorInstance
-
-    private lateinit var applicationComponent: ApplicationComponent
+    override fun androidInjector(): AndroidInjector<Any> = androidInjectorInstance
 
     override fun onCreate() {
         super.onCreate()
 
-        applicationComponent = DaggerApplicationComponent
-            .builder()
-            .appContextModule(AppContextModule(this))
+        DaggerApplicationComponent.builder().
+            appContextModule(AppContextModule(applicationContext))
             .networkingModule(NetworkingModule())
-            .build()
-        applicationComponent.inject(this)
-    }
+            .build().inject(this)
 
-    fun getApplicationComponent() : ApplicationComponent{
-        return applicationComponent
+
     }
 
 }

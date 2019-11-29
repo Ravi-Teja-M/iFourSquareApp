@@ -1,18 +1,15 @@
 package com.ifoursquare.app.presentation.di.modules
 
-import com.ifoursquare.app.data.model.login.LoginModel
+import com.ifoursquare.app.presentation.activities.MainActivity
 import dagger.Module
-import dagger.Provides
+import dagger.android.ContributesAndroidInjector
 
 @Module
-class ActivityModule {
+abstract class ActivityModule {
 
 
-    @Provides
-    fun loginModelMock():LoginModel {
+   @ContributesAndroidInjector(modules = [FragmentModule::class])
 
-        return  LoginModel("Rav","Tej")
-    }
-
+  abstract fun mainActivity(): MainActivity
 
 }
