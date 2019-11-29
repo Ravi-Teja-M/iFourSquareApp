@@ -1,5 +1,6 @@
 package com.ifoursquare.app.presentation.di.modules
 
+import com.ifoursquare.app.presentation.activities.LoginActivity
 import com.ifoursquare.app.presentation.activities.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -8,7 +9,9 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityModule {
 
   @ContributesAndroidInjector(modules = [FragmentModule::class])
-
   abstract fun mainActivity(): MainActivity
 
+
+  @ContributesAndroidInjector
+  abstract fun loginActivity():LoginActivity
 }

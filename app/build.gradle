@@ -64,7 +64,7 @@ dependencies {
 
     //Firebase goes here
 
-    //implementation "com.google.firebase:firebase-auth:$firebase_auth"
+    implementation "com.google.firebase:firebase-auth:$firebase_auth"
 
     //Dagger2
     implementation "com.google.dagger:dagger:$dagger_v"

@@ -5,7 +5,7 @@
     android:id="@+id/constraint_spalsh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@android:color/white"
     tools:context=".presentation.activities.SplashScreen">
 
 
@@ -14,13 +14,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/akronim"
-        android:text="iFourSquare"
-        android:textColor="#FFFFFF"
+        android:text="@string/i_four_square"
+        android:textColor="#5C6BC0"
         android:textSize="48sp"
-        android:textStyle="normal|bold"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/app_logo_splash"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+
+        android:layout_marginBottom="48dp"
+        android:contentDescription="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/app_icon" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
