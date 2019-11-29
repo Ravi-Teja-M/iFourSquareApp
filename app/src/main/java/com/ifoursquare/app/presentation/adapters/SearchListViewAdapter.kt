@@ -1,14 +1,12 @@
 package com.ifoursquare.app.presentation.adapters
 
 import android.app.Activity
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.ifoursquare.app.R
 import com.ifoursquare.app.data.model.venues.Venue
 
@@ -36,7 +34,7 @@ class SearchListViewAdapter : RecyclerView.Adapter<SearchListViewAdapter.ViewHol
             val category = dataSet[position].categories.first()
             category.let {
                 venueType.text = it.shortName
-                Glide.with(itemView.context).load((Uri.parse(it.icon.get64x64SizedImage()))).into(venueImage)
+                //Glide.with(itemView.context).load((Uri.parse(it.icon.get64x64SizedImage()))).into(venueImage)
             }
         }
     }

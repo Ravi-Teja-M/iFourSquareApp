@@ -15,6 +15,5 @@ class SearchPlacesViewModelFactory @Inject constructor(private val repository: S
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return SearchPlacesViewModel(SearchVenue(repository)) as T
-
     }
 }
