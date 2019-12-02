@@ -2,7 +2,7 @@ package com.ifoursquare.app.data.model.login
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.ifoursquare.app.BR
+import androidx.databinding.library.baseAdapters.BR
 
 class LoginModel( userName: String ="",    password: String="" ) : BaseObservable( ) {
 
@@ -11,14 +11,14 @@ class LoginModel( userName: String ="",    password: String="" ) : BaseObservabl
          @Bindable get() =  field
     set(value) {
         field= value
-        //notifyPropertyChanged(BR.userName)
+        notifyPropertyChanged(BR.userName)
      }
 
       var password: String = password
         @Bindable get() =  field
         set(value) {
             field= value
-          //  notifyPropertyChanged(BR.password)
+            notifyPropertyChanged(BR.password)
         }
 
 }

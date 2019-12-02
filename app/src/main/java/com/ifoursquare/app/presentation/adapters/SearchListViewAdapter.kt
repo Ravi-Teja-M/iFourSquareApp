@@ -23,7 +23,7 @@ class SearchListViewAdapter : RecyclerView.Adapter<SearchListViewAdapter.ViewHol
 
     override fun getItemCount(): Int {
 
-        return dataSet.size
+        return if(dataSet!=null) return dataSet.size else 0
     }
 
     override fun onBindViewHolder(holder: ViewHolderImpl, position: Int) {
@@ -31,11 +31,12 @@ class SearchListViewAdapter : RecyclerView.Adapter<SearchListViewAdapter.ViewHol
             venueTitle.text = dataSet[position].name
             venueArea.text = dataSet[position].location.city
 
-            val category = dataSet[position].categories.first()
-            category.let {
+            if(dataSet[position].categories.isNotEmpty()) {
+            val category =  dataSet[position].categories[0]
+            category?.let {
                 venueType.text = it.shortName
                 //Glide.with(itemView.context).load((Uri.parse(it.icon.get64x64SizedImage()))).into(venueImage)
-            }
+            }}
         }
     }
 

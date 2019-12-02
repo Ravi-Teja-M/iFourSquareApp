@@ -3,17 +3,11 @@ package com.ifoursquare.app.presentation.activities
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.graphics.Path
 import android.os.Bundle
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.Animation.AnimationListener
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.ifoursquare.app.R
-import com.ifoursquare.app.presentation.utils.getLocationOnScreen
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -31,10 +25,9 @@ class SplashScreen : AppCompatActivity(), CoroutineScope {
     override fun onStart() {
         super.onStart()
         val imageView = findViewById<ImageView>(R.id.app_logo_splash)
-        val titleLabel: TextView = findViewById(R.id.textView)
 
         val animator = ObjectAnimator.ofFloat(imageView,"translationY", -900f).apply {
-            duration = 1500
+            duration = 500
             start()
         }
         animator.addListener(object :Animator.AnimatorListener {

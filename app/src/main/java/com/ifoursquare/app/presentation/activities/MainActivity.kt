@@ -9,11 +9,10 @@ import com.ifoursquare.app.R
 import com.ifoursquare.app.databinding.ActivityMainBinding
 import com.ifoursquare.app.presentation.fragments.NearByPlacesFragment
 import com.ifoursquare.app.presentation.fragments.SearchPlacesFragment
-import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 import javax.inject.Named
 
-class MainActivity : DaggerAppCompatActivity()   {
+class MainActivity : BaseActivity() {
 
     private var currentSelectedFragment: Fragment? = null
 
@@ -21,7 +20,7 @@ class MainActivity : DaggerAppCompatActivity()   {
     @Named("getApplicationContext")
     lateinit var contextX: Context
 
-     override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
@@ -31,9 +30,13 @@ class MainActivity : DaggerAppCompatActivity()   {
         )
         initBottomBarViewWithActions(binding)
 
-        addSearchPlacesFragment()
+        //addNearByPlacesFragment()
+        getCurrentLocation()
     }
 
+    private fun getCurrentLocation() {
+
+    }
 
 
     private fun initBottomBarViewWithActions(binding: ActivityMainBinding) {
@@ -57,16 +60,27 @@ class MainActivity : DaggerAppCompatActivity()   {
     }
 
     private fun addSearchPlacesFragment() {
-        val searchPlacesFragment: SearchPlacesFragment = SearchPlacesFragment.newInstance()
-        supportFragmentManager.beginTransaction().replace(R.id.container, searchPlacesFragment)
+        var searchPlacesFragment: SearchPlacesFragment? =   supportFragmentManager.findFragmentByTag("SearchPlacesFragment") as? SearchPlacesFragment
+        if (searchPlacesFragment == null) {
+            searchPlacesFragment = SearchPlacesFragment.newInstance()
+        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, searchPlacesFragment, "SearchPlacesFragment")
+            .addToBackStack("SearchPlacesFragment")
             .commit()
         supportFragmentManager.beginTransaction().setPrimaryNavigationFragment(searchPlacesFragment)
         currentSelectedFragment = searchPlacesFragment
     }
 
     private fun addNearByPlacesFragment() {
-        val nearByPlacesFragment: NearByPlacesFragment = NearByPlacesFragment.newInstance()
-        supportFragmentManager.beginTransaction().replace(R.id.container, nearByPlacesFragment)
+
+        var nearByPlacesFragment: NearByPlacesFragment? =
+            supportFragmentManager.findFragmentByTag("NearByPlacesFragment") as? NearByPlacesFragment
+        if (nearByPlacesFragment == null) {
+            nearByPlacesFragment = NearByPlacesFragment.newInstance()
+        }
+        supportFragmentManager.beginTransaction().replace(R.id.container, nearByPlacesFragment,"NearByPlacesFragment")
+            .addToBackStack("NearByPlacesFragment")
             .commit()
         currentSelectedFragment = nearByPlacesFragment
     }

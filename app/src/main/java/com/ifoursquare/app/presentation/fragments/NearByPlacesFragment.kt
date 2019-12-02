@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import com.ifoursquare.app.R
 import com.ifoursquare.app.presentation.viewmodels.NearByPlacesViewModel
 
-class NearByPlacesFragment : Fragment() {
+class NearByPlacesFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = NearByPlacesFragment()

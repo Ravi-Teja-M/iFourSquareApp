@@ -17,7 +17,7 @@ import com.ifoursquare.app.presentation.viewmodels.factories.SearchPlacesViewMod
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class SearchPlacesFragment : DaggerFragment()  {
+class SearchPlacesFragment : BaseFragment()  {
 
     private lateinit var binding: SearchPlacesFragmentBinding
     private lateinit var viewModel: SearchPlacesViewModel

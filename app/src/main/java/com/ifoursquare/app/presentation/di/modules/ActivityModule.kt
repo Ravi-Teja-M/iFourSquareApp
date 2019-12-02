@@ -12,6 +12,6 @@ abstract class ActivityModule {
   abstract fun mainActivity(): MainActivity
 
 
-  @ContributesAndroidInjector
+  @ContributesAndroidInjector(modules = [LoginModule::class])
   abstract fun loginActivity():LoginActivity
 }
