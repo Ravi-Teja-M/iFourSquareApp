@@ -24,8 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.activities.LoginActivity"/>
-        <activity android:name=".presentation.activities.MainActivity">
+        <activity android:name=".presentation.activities.LoginActivity" android:theme="@style/NoActionBarHere"/>
+        <activity android:name=".presentation.activities.MainActivity" android:theme="@style/NoActionBarHere">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

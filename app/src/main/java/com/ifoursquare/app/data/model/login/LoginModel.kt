@@ -2,7 +2,7 @@ package com.ifoursquare.app.data.model.login
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.ifoursquare.app.BR
+import androidx.databinding.library.baseAdapters.BR
 
 class LoginModel( userName: String ="",    password: String="" ) : BaseObservable( ) {
 

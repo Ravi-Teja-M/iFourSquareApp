@@ -5,10 +5,7 @@ import com.ifoursquare.app.data.repositories.SearchVenueRepository
 import com.ifoursquare.app.domain.usecases.SearchVenueUseCase
 import javax.inject.Inject
 
-class SearchVenue @Inject constructor() : SearchVenueUseCase {
-
-    @Inject
-    lateinit var repository :SearchVenueRepository
+class SearchVenue @Inject constructor(private val repository :SearchVenueRepository) : SearchVenueUseCase {
 
      override suspend fun searchVenueByString(searchedString: String?) : VenueModel {
 
